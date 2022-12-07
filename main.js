@@ -86,35 +86,65 @@ posts.forEach((post) => {
 
     containerElement.innerHTML += `
     <div class="post">
-            <div class="post__header">
-                <div class="post-meta">                    
-                    <div class="post-meta__icon">
-                        <img class="profile-pic" src="${image}" alt="${name}">                    
-                    </div>
-                    <div class="post-meta__data">
-                        <div class="post-meta__author">${name}</div>
-                        <div class="post-meta__time">${created}</div>
-                    </div>                    
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    <img class="profile-pic" src="${image}" alt="${name}">                    
                 </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${name}</div>
+                    <div class="post-meta__time">${created}</div>
+                </div>                    
             </div>
-            <div class="post__text">${content}</div>
-            <div class="post__image">
-                <img src="${media}" alt="">
-            </div>
-            <div class="post__footer">
-                <div class="likes js-likes">
-                    <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
-                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                            <span class="like-button__label">Mi Piace</span>
-                        </a>
-                    </div>
-                    <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
-                    </div>
-                </div> 
-            </div>            
-        </div>`;
+        </div>
+        <div class="post__text">${content}</div>
+        <div class="post__image">
+            <img src="${media}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                </div>
+            </div> 
+        </div>            
+    </div>`;
 
     
+    
+    
 })
+
+
+const divElement = document.querySelectorAll("div.likes__counter");
+
+const likeButtons= document.querySelectorAll(".like-button");
+
+const likesList= []
+
+likeButtons.forEach((likeButton,index) =>{
+    likeButton.addEventListener("click", function(){
+
+        likeButton.classList.toggle("like-button--liked");
+        
+        let newLike
+        
+        if (!likesList.includes(posts[index])){
+            likesList.push(posts[index]);
+            newLike = posts[index].likes + 1;
+        } else{
+            likesList.splice(posts[index]);
+            newLike = posts[index].likes;
+        }
+        divElement[index].innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${newLike}</b> persone`
+        
+        console.log(likesList);
+    })
+})
+
