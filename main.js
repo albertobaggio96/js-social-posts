@@ -133,17 +133,17 @@ likeButtons.forEach((likeButton,index) =>{
 
         likeButton.classList.toggle("like-button--liked");
         
-        let newLike
+        let newLike = posts[index].likes
         
         if (!likesList.includes(posts[index])){
-            likesList.push(posts[index]);
-            newLike = posts[index].likes + 1;
+            likesList.push(posts[index])
+            newLike ++ ;
         } else{
-            likesList.splice(posts[index]);
-            newLike = posts[index].likes;
+            likesList.splice(likesList.indexOf(posts[index]),1);
+            newLike;
         }
-        divElement[index].innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${newLike}</b> persone`
         
+        divElement[index].innerHTML = `Piace a <b id="like-counter-1" class="js-likes-counter">${newLike}</b> persone`;
         console.log(likesList);
     })
 })
