@@ -82,7 +82,7 @@ const containerElement = document.getElementById("container");
 posts.forEach((post) => {
     
     let {content, media, likes, created} = post;
-    const {name, image} = post.author; 
+    let {name, image} = post.author; 
 
     created = getReverseDate(created);
 
@@ -91,7 +91,7 @@ posts.forEach((post) => {
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${image}" alt="${name}">                    
+                    <img class="profile-pic" src="${image}" alt="${name.replace(/[^A-Z]+/g, "")}">                    
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${name}</div>
