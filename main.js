@@ -81,8 +81,10 @@ const containerElement = document.getElementById("container");
 
 posts.forEach((post) => {
     
-    const {content, media, likes, created} = post;
+    let {content, media, likes, created} = post;
     const {name, image} = post.author; 
+
+    created = getReverseDate(created);
 
     containerElement.innerHTML += `
     <div class="post">
@@ -114,11 +116,7 @@ posts.forEach((post) => {
                 </div>
             </div> 
         </div>            
-    </div>`;
-
-    
-    
-    
+    </div>`; 
 })
 
 
@@ -133,10 +131,10 @@ likeButtons.forEach((likeButton,index) =>{
 
         likeButton.classList.toggle("like-button--liked");
         
-        let newLike = posts[index].likes
+        let newLike = posts[index].likes;
         
         if (!likesList.includes(posts[index])){
-            likesList.push(posts[index])
+            likesList.push(posts[index]);
             newLike ++ ;
         } else{
             likesList.splice(likesList.indexOf(posts[index]),1);
@@ -148,3 +146,12 @@ likeButtons.forEach((likeButton,index) =>{
     })
 })
 
+// ************************** Function ***********************
+
+function getReverseDate (element){
+    const year= element.slice(0, 4);
+    const month= element.slice(4, 8);
+    const day= element.slice(8);
+
+    return `${day}${month}${year}`;
+}
